@@ -1,0 +1,52 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 30px;
+    border: 1px solid black;
+}
+
+.header ul{
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.header ul li{
+    font-size: 16px;
+    margin-inline: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+}
+
+.bodyContent{
+    padding-inline: 50px;
+}
+
+.logo img{
+    width: 90px;
+    height: 90px;
+}
+
+.card{
+    border: 1px solid black;
+    width: 200px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.card > img{
+    width: 100%;
+    border-radius: 2px;
+}
+
+.res-container{
+    display: flex;
+    flex-wrap: wrap;
+}
