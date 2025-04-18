@@ -34,19 +34,58 @@
     height: 90px;
 }
 
+.filter{
+    margin: 20px 0 10px 10px;
+}
+
 .card{
-    border: 1px solid black;
+    border-radius: 10px;
     width: 200px;
+    height: 300px;
     padding: 5px;
     margin: 5px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+.card:hover{
+    border: 1px solid black;
 }
 
 .card > img{
     width: 100%;
-    border-radius: 2px;
+    height: 150px;
+    border-radius: 10px;
 }
 
 .res-container{
     display: flex;
     flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.shimmer-container{
+    position: absolute;
+    top: 150px;
+    left: -30px;
+    padding-inline: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.shimmer-card{
+    border-radius: 10px;
+    width: 200px;
+    height: 300px;
+    background-color: #f0f0f0;
+}
+
+.btn{
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.card-title{
+    margin: 10px 0;
 }
