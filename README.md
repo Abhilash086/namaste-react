@@ -107,3 +107,10 @@ class UserClass extends React.Component{
 
 export default UserClass 
 ```
+
+>### componentDidMount() is called after constructor() and render() is called.
+---
+
+## Component Lifecycle Diagram
+
+![alt text](image.png)
