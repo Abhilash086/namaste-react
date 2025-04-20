@@ -17,13 +17,16 @@ It keeps track of the exact version of the dependency and creates a hash becoz y
 - Class based components
 - Functional based component --> A function that returns some JSX / React Element is known as functional component.
 
-### Component Composition
+## Component Composition
 Adding two or more components into one another is known as component composition.
 
 ## System Design Interviews
 Config driven UI --> Means our UI/website is driven by a config file, where UI changes dynamically with data.
 
-### whenever a state variable changes React re-renders the component.
+<blockquote style="padding: 10px; border-left: 4px solid #cccc; color:rgb(177, 184, 194)">
+  <strong>whenever a state variable changes React re-renders the component.</strong>
+</blockquote>
+
 
 ## Virtual DOM
 It is the representation of an Actual DOM
@@ -51,14 +54,17 @@ Browsers are blocking us to call API from One origin to another Origin is called
 ## Shimmer UI
 It resembles the actual UI so users will understand how quickly our web app or mobile app load even before the content has shown up.
 
-## cont [btn, setBtn] = useState(); Its a const variable so how its changing?
-const [btn, setBtn] = useState(); 
+```jsx
+const [btn, setBtn] = useState();
+```
+### Its a const variable so how its changing?
 
 This line does destructuring. Behind the scenes, it’s like:
-
+```jsx
 const stateArray = useState();
 const btn = stateArray[0];      // current value of the state
 const setBtn = stateArray[1];   // function to update the state
+```
 
 React will re-run your component function whenever state changes, and it’ll assign a new value to btn on each render.
 - btn is const → its reference won't change during a single render.
@@ -70,5 +76,34 @@ React will re-run your component function whenever state changes, and it’ll as
 ## What is SPA (Single Page Application)
 It is just a one page only components are getting interchanged via client side Routing.
 
-### Note : Server side routing means page reloads make a network call gets the response in HTML etc.. and displays in the client side.
+>***Note :*** Server side routing means page reloads, makes a network call gets the response in HTML etc.. and displays in the client side.
 
+## Class based components
+Class based components extends React.Component class and it provides a render() method that returns some piece of JSX.
+- When using props, props are passed normally to Component but while receiving we have to call super(props) inside the extended Component constructor.
+- props are received in constructor and passed in super as super(props) then we can use this.props anywhere in class.
+
+Ex: 
+```jsx 
+import React from "react";
+
+class UserClass extends React.Component{
+
+    constructor(props){
+        super(props);
+    }
+
+    render(){
+        return (
+            <div className="user">
+                <h2>Name: {this.props.name}</h2>
+                <h3>Contact: abhilash086</h3>
+                <h4>Location: Bengaluru</h4>
+                <p>Portfolio: Green</p>
+            </div>
+        )
+    }
+}
+
+export default UserClass 
+```
