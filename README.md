@@ -66,3 +66,9 @@ React will re-run your component function whenever state changes, and it’ll as
 - During re-render, btn now holds "new value" — but it’s still declared as const because it's a new render context
 - btn is a const, but it changes because React re-runs the component function and gives btn the new value.
 - setBtn is what triggers this re-render.
+
+## What is SPA (Single Page Application)
+It is just a one page only components are getting interchanged via client side Routing.
+
+### Note : Server side routing means page reloads make a network call gets the response in HTML etc.. and displays in the client side.
+
