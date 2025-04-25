@@ -17,10 +17,12 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
-    const { restaurants } =
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle;
+    // console.log(json)
+    const restaurantsCard = json?.data?.cards?.find((card) => card?.card?.card?.gridElements?.infoWithStyle.restaurants);
+    const {restaurants} = restaurantsCard?.card?.card?.gridElements?.infoWithStyle;
     setResList(restaurants);
     setFilteredRes(restaurants);
+    
   };
 
   // Conditional rendering
@@ -69,7 +71,7 @@ const Body = () => {
       <div className="res-parent">
         <div className="res-container">
           {filteredRes.map((item) => {
-            console.log(item.info.id)
+            // console.log(item.info.id)
             return <Link className="card-link" key={item.info.id} to={"/restaurants/"+item.info.id}><RestaurantCard item={item} /></Link>;
           })}
         </div>
