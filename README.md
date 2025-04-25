@@ -114,3 +114,14 @@ export default UserClass
 ## Component Lifecycle Diagram
 
 ![alt text](image.png)
+
+
+<h1>Optimising the App</h1>
+
+### Code splitting / Code chunking / Lazy Loading / Dynamic Bundling
+---
+- Break down the app into multiple small bundles.
+- For example now parcel is doing bundling and creates a single JS file to load the app.
+- Let us assume there is a Grocery section in which there are 100s of sub components at that time App becomes large and it will take time to Load so instead we create bundle seperately for Grocery section.
+- It is loaded when the user clicks on Grocery section so its called Lazy Loading.
+
