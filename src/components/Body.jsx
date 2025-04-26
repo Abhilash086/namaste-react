@@ -38,19 +38,19 @@ const Body = () => {
   return resList.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="bodyContent">
-      <div className="filter">
-        <div className="search">
+    <div className="mx-10">
+      <div className="flex gap-4 m-4">
+        <div className="flex gap-4">
           <input
             type="text"
-            className="input-search"
+            className="border border-amber-700 rounded-xl px-3"
             value={searchText}
             onChange={(e) => {
               setsearchText(e.target.value);
             }}
           />
           <button
-            className="btn"
+            className="border border-amber-700 rounded-lg cursor-pointer hover:bg-amber-500 px-4 py-1"
             onClick={() => {
               setFilteredRes(
                 resList.filter((restaurant) =>
@@ -66,7 +66,7 @@ const Body = () => {
           </button>
         </div>
         <button
-          className="btn1"
+          className="border border-amber-700 rounded-lg cursor-pointer hover:bg-amber-500 px-4 py-1"
           onClick={() => {
             setResList(resList.filter((item) => item.info.avgRating > 4));
           }}
@@ -75,7 +75,7 @@ const Body = () => {
         </button>
       </div>
       <div className="res-parent">
-        <div className="res-container">
+        <div className="flex flex-wrap px-4 gap-6">
           {filteredRes.map((item) => {
             // console.log(item.info.id)
             return <Link className="card-link" key={item.info.id} to={"/restaurants/"+item.info.id}><RestaurantCard item={item} /></Link>;

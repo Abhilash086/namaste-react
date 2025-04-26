@@ -125,3 +125,5 @@ export default UserClass
 - Let us assume there is a Grocery section in which there are 100s of sub components at that time App becomes large and it will take time to Load so instead we create bundle seperately for Grocery section.
 - It is loaded when the user clicks on Grocery section so its called Lazy Loading.
 
+## Higher Order Components
+It is a function that takes a component and enhances it and return a component.
