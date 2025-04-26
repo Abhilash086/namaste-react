@@ -18,10 +18,12 @@ const Header = () => {
     return (
       <div className="flex justify-between items-center shadow-lg px-4 sm:px-8">
         <div className="w-26">
-          <img 
-            src={LOGO_URL}
-            alt=""
-          />
+          <Link to="/">
+            <img 
+              src={LOGO_URL}
+              alt=""
+            />
+          </Link>
         </div>
         <ul className={`gap-12 sm:flex sm:gap-6 ${isOpen ? "block" : "hidden"}`}>
           <li>Online status: {onlineStatus ? "🟢" : "🔴"}</li>

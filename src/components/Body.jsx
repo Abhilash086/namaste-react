@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, {withPromotedLabel} from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
@@ -8,6 +8,8 @@ const Body = () => {
   const [resList, setResList] = useState([]);
   const [searchText, setsearchText] = useState("");
   const [filteredRes, setFilteredRes] = useState([]);
+
+  const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
 
   useEffect(() => {
     fetchData();
@@ -77,8 +79,12 @@ const Body = () => {
       <div className="res-parent">
         <div className="flex flex-wrap px-4 gap-6">
           {filteredRes.map((item) => {
-            // console.log(item.info.id)
-            return <Link className="card-link" key={item.info.id} to={"/restaurants/"+item.info.id}><RestaurantCard item={item} /></Link>;
+            // console.log(item.info.sla.slaString)
+            return (
+              <Link className="card-link" key={item.info.id} to={"/restaurants/"+item.info.id}>
+                {item.info.sla.slaString ? <RestaurantCardPromoted item={item}/> : <RestaurantCard item={item} />}
+              </Link>
+            );
           })}
         </div>
       </div>

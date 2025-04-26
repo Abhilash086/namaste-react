@@ -10,14 +10,13 @@ const useRestaurantMenu = (resId)=>{
     },[])
 
     const fetchData = async ()=>{
-        console.log(resId)
         const res = await fetch(`https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9715987&lng=77.5945627&restaurantId=${resId}&catalog_qa=undefined&submitAction=ENTER`);
         const data = await res.json();
-        const menuCard = data?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.find((item) => item?.card?.card?.itemCards) || data?.data?.cards[5]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.find((item) => item?.card?.card?.itemCards)
-        // console.log(menuCard)
+        const categories = data?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards || data?.data?.cards[5]?.groupedCard?.cardGroupMap?.REGULAR?.cards
+    
         setMenuData({
             name: data?.data?.cards[0]?.card?.card?.text,
-            menuList: menuCard?.card?.card?.itemCards
+            itemCategory: categories.filter(c => c.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory")
         });
     }
 
