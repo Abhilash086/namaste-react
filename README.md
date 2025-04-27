@@ -127,3 +127,11 @@ export default UserClass
 
 ## Higher Order Components
 It is a function that takes a component and enhances it and return a component.
+
+## Lifting the State Up
+Defining the state in Parent component rather than in the Child Component is known as Lifting State.
+
+## Controlled and Uncontrolled Components
+- If the components has its own state defined then its called Uncontrolled components.
+- If the Components are controlled by the Parent Component then it is called Controlled Component.
+

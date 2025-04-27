@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import ItemList from './ItemList'
 
-const RestaurantCategory = ({category}) => {
-
-    const [isOpen, setIsOpen] = useState(true);
+const RestaurantCategory = ({category,isOpen,setIsOpen, setShowIndex}) => {
 
     const handleClick= ()=>{
+        setShowIndex();
         setIsOpen(!isOpen)
     }
 
