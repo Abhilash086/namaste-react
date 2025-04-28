@@ -1,39 +1,93 @@
-import React from 'react';
-import { ITEM_CLOUDINARY } from '../utils/constants';
+import React, { useContext, useEffect } from "react";
+import { ITEM_CLOUDINARY } from "../utils/constants";
+import { CartContext } from "../utils/CartContext";
 
-const ItemList = ({itemList}) => {
+const ItemList = ({ itemList }) => {
+  const { cartInfo, setCartInfo } = useContext(CartContext);
+  console.log(cartInfo)
+
+  const addToCart = (item) => {
+    const itemInfo = item?.card?.info;
+
+    const existingItem = cartInfo?.cartItems?.find((cart)=> cart?.id === itemInfo?.id)
+
+    if(existingItem){
+      const updatedItem = {
+        ...existingItem,
+        quantity: existingItem.quantity + 1
+      }
+
+      setCartInfo((prev)=> ({...prev,cartItems: [{...updatedItem}]}));
+    }
+
+    const newItem = {
+      ...itemInfo,
+      quantity: 1
+    }
+
+    setCartInfo((prev) => ({
+      ...prev,
+      cartItems: [...prev.cartItems, newItem],
+    }));
+  }
+
   return (
-    <div className='w-full'>
-        {itemList &&
+    <div className="w-full">
+      {itemList &&
         itemList.map((item, idx) => (
-            <div key={idx} className="w-full my-2 flex items-center justify-between p-4 rounded-2xl border-b-2">
-                <div className="flex flex-col gap-3 w-full wrap-break-word">
-                    {/* {console.log(item)} */}
-                    <h3 className="text-xl font-semibold">{item?.card?.info?.name}</h3>
-                    <div className="flex gap-3 items-center">
-                    <p className="text-2xl"><strong>₹
-                        {item?.card?.info?.price / 100 ||
-                        item?.card?.info?.defaultPrice / 100}</strong>
-                    </p>
-                    <p>
-                        <strong>
-                        {item?.card?.info?.ratings?.aggregatedRating?.rating}⭐
-                        </strong>
-                    </p>
-                    </div>
-                    <p className="text-wrap text-[12px]">{item?.card?.info?.description}</p>
-                </div>
-                <div className='relative'>
-                    <button className='border border-green-500 bg-green-50 rounded-lg text-sm font-semibold absolute py-1 px-4 bottom-0 left-3/6 -translate-x-3/6 cursor-pointer'>Add +</button>
-                    <img className="rounded-2xl" src={ITEM_CLOUDINARY + item?.card?.info?.imageId} alt="" />
-                </div>
+          <div
+            key={idx}
+            className="w-full my-2 flex items-center justify-between p-4 rounded-2xl border-b-2"
+          >
+            <div className="flex flex-col gap-3 w-full wrap-break-word">
+              {/* {console.log(item)} */}
+              <h3 className="text-xl font-semibold">
+                {item?.card?.info?.name}
+              </h3>
+              <div className="flex gap-3 items-center">
+                <p className="text-2xl">
+                  <strong>
+                    ₹
+                    {item?.card?.info?.price / 100 ||
+                      item?.card?.info?.defaultPrice / 100}
+                  </strong>
+                </p>
+                <p>
+                  <strong>
+                    {item?.card?.info?.ratings?.aggregatedRating?.rating}⭐
+                  </strong>
+                </p>
+              </div>
+              <p className="text-wrap text-[12px]">
+                {item?.card?.info?.description}
+              </p>
             </div>
+            <div className="relative">
+              <button
+                className="flex gap-2 items-center justify-between border border-green-500 bg-green-50 rounded-lg text-sm font-semibold absolute bottom-0 left-3/6 -translate-x-3/6 cursor-pointer"
+                onClick={() => addToCart(item)}
+              >
+                <span>
+                  <i className="fa-solid fa-minus p-2"></i>
+                </span>
+                 Add
+                <span>
+                  <i className="fa-solid fa-plus p-2"></i>
+                </span>
+              </button>
+              <img
+                className="rounded-2xl"
+                src={ITEM_CLOUDINARY + `${item?.card?.info?.imageId ? item?.card?.info?.imageId : ""}`}
+                alt=""
+              />
+            </div>
+          </div>
         ))}
     </div>
-  )
-}
+  );
+};
 
-export default ItemList
+export default ItemList;
 
 // {menuData.menuList &&
 //   menuData.menuList.map((item, idx) => (

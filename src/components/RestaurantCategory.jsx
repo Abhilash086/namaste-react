@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import ItemList from './ItemList'
 
-const RestaurantCategory = ({category,isOpen,setIsOpen, setShowIndex}) => {
+const RestaurantCategory = ({category,isOpen, setShowIndex}) => {
 
     const handleClick= ()=>{
         setShowIndex();
-        setIsOpen(!isOpen)
     }
 
   return (
@@ -16,7 +15,7 @@ const RestaurantCategory = ({category,isOpen,setIsOpen, setShowIndex}) => {
             onClick={handleClick}
             className='flex items-center justify-between bg-gray-200 px-8 py-4 rounded-t-lg cursor-pointer'>
             <span className='font-semibold text-xl'>{category?.card?.card?.title} ({category?.card?.card?.itemCards?.length})</span>
-            <span className='cursor-pointer'>⬇️</span>
+            <span className='cursor-pointer'>{isOpen ? "⬆️" : "⬇️"}</span>
         </div>
         {/* Accordian Body/ Item List */}
         {isOpen && <ItemList itemList={category?.card?.card?.itemCards}/>}

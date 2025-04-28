@@ -6,8 +6,7 @@ import { useState } from "react";
 const RestaurantMenu = () => {
   const { resId } = useParams();
 
-  const [showIndex, setShowIndex] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
+  const [showIndex, setShowIndex] = useState(0);
 
   const menuData = useRestaurantMenu(resId);
 
@@ -21,8 +20,7 @@ const RestaurantMenu = () => {
               key={idx} 
               category={item}
               isOpen={showIndex === idx}
-              setShowIndex={()=>{setShowIndex(showIndex === idx ? null : idx)}}
-              setIsOpen={setIsOpen}/>
+              setShowIndex={()=>{setShowIndex(showIndex === idx ? null : idx)}}/>
         )
       })}
     </div>

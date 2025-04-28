@@ -5,8 +5,10 @@ import Body from "./components/Body";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import About from "./pages/About";
 import Error from "./pages/Error";
-import Contact from "./components/Contact"
+import Contact from "./components/Contact";
 import RestaurantMenu from "./pages/RestaurantMenu";
+import { CartContextProvider } from "./utils/CartContext.js";
+import Cart from "./pages/Cart";
 
 // const parent = React.createElement("div",{id: "parent"}, [
 //     React.createElement("div",{id: "child", key: 1},
@@ -18,17 +20,18 @@ import RestaurantMenu from "./pages/RestaurantMenu";
 // ]
 // );
 
-
 const AppLayout = () => {
   return (
-    <div className="app">
-      <Header />
-      <Outlet />
-    </div>
+    <CartContextProvider>
+      <div className="app">
+        <Header />
+        <Outlet />
+      </div>
+    </CartContextProvider>
   );
 };
 
-const Grocery = lazy(()=> import('./components/Grocery.jsx'));
+const Grocery = lazy(() => import("./components/Grocery.jsx"));
 
 const router = createBrowserRouter([
   {
@@ -37,29 +40,37 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Body />
+        element: <Body />,
       },
       {
         path: "/about",
-        element: <About />
+        element: <About />,
       },
       {
         path: "/contact",
-        element: <Contact />
+        element: <Contact />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />
       },
       {
         path: "/grocery",
-        element: <Suspense fallback={<h1>Loading...</h1>}><Grocery /></Suspense>
+        element: (
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <Grocery />
+          </Suspense>
+        ),
       },
       {
         path: "/restaurants/:resId",
-        element: <RestaurantMenu />
-      }
+        element: <RestaurantMenu />,
+      },
     ],
-    errorElement: <Error />
+    errorElement: <Error />,
   },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-root.render(<RouterProvider router={router}/>);
+root.render(<RouterProvider router={router} />);

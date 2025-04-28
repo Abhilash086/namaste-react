@@ -135,3 +135,21 @@ Defining the state in Parent component rather than in the Child Component is kno
 - If the components has its own state defined then its called Uncontrolled components.
 - If the Components are controlled by the Parent Component then it is called Controlled Component.
 
+## 🔄 Custom Hooks vs Context
+
+| Feature       | Custom Hooks                     | Context                                |
+|---------------|----------------------------------|----------------------------------------|
+| **Purpose**   | Reuse logic                      | Share state across components          |
+| **Shares State?** | ❌ No, each has own state     | ✅ Yes, shared via Provider             |
+| **Use Case**  | Encapsulate logic                | Global state (theme, auth, etc)        |
+
+### What does context API solve the problem?
+> It eliminate the problem of props drilling.
+
+## Context API
+It is a hook provided by React to use the data all over the Application without prop drilling.
+
+
+
+
+
