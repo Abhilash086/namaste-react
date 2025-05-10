@@ -7,8 +7,9 @@ import About from "./pages/About";
 import Error from "./pages/Error";
 import Contact from "./components/Contact";
 import RestaurantMenu from "./pages/RestaurantMenu";
-import { CartContextProvider } from "./utils/CartContext.js";
 import Cart from "./pages/Cart";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore.js";
 
 // const parent = React.createElement("div",{id: "parent"}, [
 //     React.createElement("div",{id: "child", key: 1},
@@ -22,12 +23,12 @@ import Cart from "./pages/Cart";
 
 const AppLayout = () => {
   return (
-    <CartContextProvider>
+    <Provider store={appStore}>
       <div className="app">
         <Header />
         <Outlet />
       </div>
-    </CartContextProvider>
+    </Provider>
   );
 };
 

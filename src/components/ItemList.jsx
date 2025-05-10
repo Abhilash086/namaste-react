@@ -1,39 +1,19 @@
-import React, { useContext, useEffect } from "react";
 import { ITEM_CLOUDINARY } from "../utils/constants";
-import { CartContext } from "../utils/CartContext";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem } from "../utils/cartSlice";
 
 const ItemList = ({ itemList }) => {
-  const { cartInfo, setCartInfo } = useContext(CartContext);
-  console.log(cartInfo)
 
-  const addToCart = (item) => {
-    const itemInfo = item?.card?.info;
+  const dispatch = useDispatch();
 
-    const existingItem = cartInfo?.cartItems?.find((cart)=> cart?.id === itemInfo?.id)
+  const cartItems = useSelector((store)=> store.cart.items)
 
-    if(existingItem){
-      const updatedItem = cartInfo?.cartItems?.map((cartItem)=>{
-        return cartItem.id === existingItem.id ? {...cartItem,quantity: cartItem.quantity + 1} : cartItem
-      })
-
-      setCartInfo((prev)=> ({...prev,cartItems: updatedItem}));
-      return
-    }
-
-    const newItem = {
-      ...itemInfo,
-      quantity: 1
-    }
-
-    setCartInfo((prev) => ({
-      ...prev,
-      cartItems: [...prev.cartItems, newItem]
-    }));
+  const handleAddItems = (item)=>{
+    // Dispatch an Action
+    dispatch(addItem(item))
   }
 
-  const setCartQuantity = ()=>{
-    return cartInfo?.cartItems.reduce((acc,item)=> acc + item.quantity,0)
-  }
+  console.log(cartItems)
 
   return (
     <div className="w-full">
@@ -69,16 +49,12 @@ const ItemList = ({ itemList }) => {
             <div className="relative">
               <button
                 className="flex gap-2 items-center justify-between border border-green-500 bg-green-50 rounded-lg text-sm font-semibold absolute bottom-0 left-3/6 -translate-x-3/6 cursor-pointer"
-                onClick={() => addToCart(item)}
               >
                 <span>
                   <i className="fa-solid fa-minus p-2"></i>
                 </span>
-                 {(()=>{
-                  const isCartQuantity = cartInfo.cartItems.find((i)=> i.id === item?.card?.info?.id);
-                  return isCartQuantity ? isCartQuantity.quantity : "Add" 
-                 })()}
-                <span>
+                 {"Add"}
+                <span onClick={()=> handleAddItems(item?.card?.info)}>
                   <i className="fa-solid fa-plus p-2"></i>
                 </span>
               </button>

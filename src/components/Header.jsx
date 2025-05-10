@@ -3,12 +3,14 @@ import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import MenuButton from "./MenuButton";
-import { CartContext } from "../utils/CartContext.js";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
   const [isOpen, setIsOpen] = useState(false);
-  const {cartInfo} = useContext(CartContext);
+
+  // Subscribing to the Store using Selector
+  const cartItems = useSelector((store)=> store.cart.items);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -40,8 +42,8 @@ const Header = () => {
       </ul>
       <div className="flex items-center justify-between gap-4">
         <Link to="/cart" className="text-lg mx-3 cursor-pointer relative">
-          <p className={`text-[12px] absolute -z-1 -top-3 -right-4 ${cartInfo.cartQuantity === 0 && "hidden"} bg-black text-white font-semibold rounded-lg w-6 text-center h-6 p-[4px]`}>
-            {cartInfo.cartQuantity}
+          <p className={`text-[12px] absolute -z-1 -top-3 -right-4 bg-black text-white font-semibold rounded-lg w-6 text-center h-6 p-[4px]`}>
+            {cartItems.length}
           </p>
           <i className="fa-solid fa-cart-shopping"></i>
         </Link>
