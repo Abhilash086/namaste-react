@@ -12,12 +12,12 @@ const ItemList = ({ itemList }) => {
     const existingItem = cartInfo?.cartItems?.find((cart)=> cart?.id === itemInfo?.id)
 
     if(existingItem){
-      const updatedItem = {
-        ...existingItem,
-        quantity: existingItem.quantity + 1
-      }
+      const updatedItem = cartInfo?.cartItems?.map((cartItem)=>{
+        return cartItem.id === existingItem.id ? {...cartItem,quantity: cartItem.quantity + 1} : cartItem
+      })
 
-      setCartInfo((prev)=> ({...prev,cartItems: [{...updatedItem}]}));
+      setCartInfo((prev)=> ({...prev,cartItems: updatedItem}));
+      return
     }
 
     const newItem = {
@@ -27,8 +27,12 @@ const ItemList = ({ itemList }) => {
 
     setCartInfo((prev) => ({
       ...prev,
-      cartItems: [...prev.cartItems, newItem],
+      cartItems: [...prev.cartItems, newItem]
     }));
+  }
+
+  const setCartQuantity = ()=>{
+    return cartInfo?.cartItems.reduce((acc,item)=> acc + item.quantity,0)
   }
 
   return (
@@ -70,7 +74,10 @@ const ItemList = ({ itemList }) => {
                 <span>
                   <i className="fa-solid fa-minus p-2"></i>
                 </span>
-                 Add
+                 {(()=>{
+                  const isCartQuantity = cartInfo.cartItems.find((i)=> i.id === item?.card?.info?.id);
+                  return isCartQuantity ? isCartQuantity.quantity : "Add" 
+                 })()}
                 <span>
                   <i className="fa-solid fa-plus p-2"></i>
                 </span>

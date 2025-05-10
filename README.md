@@ -149,6 +149,25 @@ Defining the state in Parent component rather than in the Child Component is kno
 ## Context API
 It is a hook provided by React to use the data all over the Application without prop drilling.
 
+# Redux Toolkit
+### What is Redux Store
+It is nothing but whole big Object where data is stored and is centralised/globalised. Any component in the app can access it.
+
+### What is Slices in Redux Store?
+We make the whole apps data into logical seperation which is known as Slices in Redux Store.  
+Ex: Cart slice, Authentication Slice etc..
+
+>Note: We cannot directly modify the Cart Slice, we have other way to modify it.
+
+### How to Update the Cart Slice/Slice of Redux Store?
+To Update the Cart Slice first we have to dispatch an action which calls a Reducer function and that function will update the Slice of the Redux Store/Cart Slice.
+
+### How do you Read the data from the Slice of Redux Store?
+- We will use the Selector which will give us the Data in the component. this phenomenon is known as Subscribing to the Store (Data is in Sync with the Store). 
+- Component is subscribed to the store using Selector
+
+![alt text](image-2.png)
+
 
 
 
